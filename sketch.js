@@ -1,6 +1,6 @@
 //fruits I love
 
-let fruits = ["strawberry", "blueberry", "cherry", "grape", "mango"];
+let fruits = [{name:"strawberry", color:"red"},{name: "blueberry", color: "blue"}{name:"cherry", color:"dark red"} {name: "grape", color:"purple"}{name: "mango", color:"yellow"}];
 
 function setup() {
   createCanvas(600, 600);
