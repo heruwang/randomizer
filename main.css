@@ -11,3 +11,11 @@ canvas {
   background-color: #dbd8f2;
   text-align: center;
 }
+
+.row{
+  display: flex;
+}
+.column{
+  margin: 10px;
+  flex: 50%;
+}

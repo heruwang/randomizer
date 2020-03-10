@@ -1,22 +1,16 @@
 //years in the future
 
-let years = [{
-  name: "2022",
-},{
-  name: "2025",
-}, {
-  name: "2028",
-},{
-  name: "2030",
-}, {
-  name: "2033",
-}];
-
+let years = ["2021","2022"];
 let randomIndex
-let animating = true;
+let animating = false;
 let futures = [];
 let imageCounter=0;
 let button;
+let cnv;
+let inps = [];
+let addMoreButton;
+let firstTime = true;
+
 function preload(){
   for(let i = 0; i<=6; i++){
     futures[i] = loadImage('assets/future' + i + '.jpeg');
@@ -24,32 +18,31 @@ function preload(){
 }
 
 function setup() {
-   createCanvas(1000, 1000);
+  cnv = createCanvas(1000, 1000);
+  background(200);
+  cnv.parent("#canvasDiv");
   textSize(36);
   imageMode(CENTER);
   textAlign(CENTER);
   textStyle(BOLD);
-  frameRate(8);
-  text("click to randomizer",50,50);
+  frameRate(3);
 
-  button = createButton('click to see your future');
+
+  button = select('#randButton');
   button.mousePressed(buttonPressed);
-  button.class("randomizerButton");
 
+  addMoreButton = select('#addMoreButton');
+  addMoreButton.mousePressed(addAnotherInput);
+
+for(let i=0; i<3; i++){
+  inps.push(createInput()) ;
+  inps[inps.length-1].parent("#inputFields");
 }
+}
+
 
 function draw() {
   background(220);
-
-
-  // background(bg);
-  // stroke(226, 204, 0);
-  // eclipse(width/2, height/2,x)
-  // x++;
-  // if(x > height)
-  // {
-  //   x=0;
-  // }
 
   if(animating == true){
     clear();
@@ -59,7 +52,10 @@ function draw() {
     {imageCounter++;}
     else{imageCounter = 0;}
   }
-
+function addAnotherInput(){
+  inps.push(createInput()) ;
+  inps[inps.length-1].parent("#inputFields");
+}
 function randomizer(){
   animating = false;
    if(years[0]){
@@ -68,16 +64,21 @@ function randomizer(){
    randomIndex = int(random(years.length));
 
     image(random(futures),width/2, height/2);
-     text(`year = ${years[randomIndex].name}`,width/2, height - 25);
+     text(years[randomIndex],width/2, height - 55);
      years.splice(randomIndex,1)
    }else{
-     background(random(200,255));
-     text("nothing left!", 50,50);
+     background(20,40,200);
+     text("nothing left!", width/2, height/2);
    }
 }
 
 function buttonPressed(){
-
+  if(firstTime == true){
+  for(let i=0; i < inps.length; i++){
+     years.push(inps[i].value());
+  }
+  firstTime = false;
+}
   animating = true;
   setTimeout(randomizer, 2000);
 
