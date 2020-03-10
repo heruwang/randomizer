@@ -1,6 +1,6 @@
 //years in the future
 
-let years = ["2021", "2022", "2028"];
+let years = [];
 let randomIndex
 let animating = false;
 let futures = [];
@@ -18,7 +18,7 @@ function preload() {
 }
 
 function setup() {
-  cnv = createCanvas(1000, 1000);
+  cnv = createCanvas(800, 800);
   background(200);
   cnv.parent("#canvasDiv");
   textSize(36);
@@ -69,7 +69,6 @@ function randomizer() {
     randomIndex = int(random(years.length));
     text(years[randomIndex], width / 2, height - 55);
     image(random(futures), width / 2, height / 2);
-
     years.splice(randomIndex, 1)
   } else {
     background(20, 40, 200);
